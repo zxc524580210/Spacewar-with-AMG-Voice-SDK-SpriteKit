@@ -135,7 +135,7 @@ class GameViewController: UIViewController {
         isCommander = !isCommander
         if isInAgoraAudio {
             let role: AgoraRtcClientRole = isCommander ? .clientRole_Broadcaster : .clientRole_Audience
-            agoraKit?.setClientRole(role)
+            agoraKit?.setClientRole(role, withKey: nil)
         }
     }
     
@@ -213,7 +213,7 @@ private extension GameViewController {
         }
         
         if let role = gameProfile.clientRole {
-            agoraKit?.setClientRole(role)
+            agoraKit?.setClientRole(role, withKey: nil)
         }
     }
     
