@@ -17,8 +17,8 @@ private struct PhysicsCategory {
 
 protocol GameSceneDelegate: NSObjectProtocol {
     func gameScene(scene: GameScene, didMoveSpeakerOfUid uid: UInt, pan : CGFloat, gain: CGFloat)
-    func gameSceneShouldPlayCollideSound(scene: GameScene) -> Bool
-    func gameScene(scene: GameScene, didCollideAtPan pan: CGFloat)
+    func gameSceneShouldPlayAudioEffect(scene: GameScene) -> Bool
+    func gameScene(scene: GameScene, needPlayEffectResource resource: String, ofType type: String, atPan pan: CGFloat)
 }
 
 class GameScene: SKScene {
@@ -176,10 +176,10 @@ private extension GameScene {
         
         star.removeFromParent()
         
-        if let shouldPlay = eventDelegate?.gameSceneShouldPlayCollideSound(scene: self),
+        if let shouldPlay = eventDelegate?.gameSceneShouldPlayAudioEffect(scene: self),
             !shouldPlay {
             let (pan, _) = panAndGain(of: speaker.position)
-            eventDelegate?.gameScene(scene: self, didCollideAtPan: pan)
+            eventDelegate?.gameScene(scene: self, needPlayEffectResource: "boom", ofType: "mp3", atPan: pan)
         } else {
             run(SKAction.playSoundFileNamed("boom.mp3", waitForCompletion: false))
         }
@@ -212,7 +212,13 @@ private extension GameScene {
         let actionMoveDone = SKAction.removeFromParent()
         
         star.run(SKAction.sequence([SKAction.group([actionMove, rotation]), actionMoveDone]))
-        run(SKAction.playSoundFileNamed("shoot.mp3", waitForCompletion: false))
+        
+        if let shouldPlay = eventDelegate?.gameSceneShouldPlayAudioEffect(scene: self),
+            !shouldPlay {
+            eventDelegate?.gameScene(scene: self, needPlayEffectResource: "shoot", ofType: "mp3", atPan: 0)
+        } else {
+            run(SKAction.playSoundFileNamed("shoot.mp3", waitForCompletion: false))
+        }
     }
     
     func addVolumeNode(of vol: UInt, to speaker: SKShapeNode) {

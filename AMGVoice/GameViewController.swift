@@ -281,12 +281,14 @@ extension GameViewController: GameSceneDelegate {
         agoraKit?.setRemoteVoicePosition(uid, pan: Double(pan), gain: Double(gain))
     }
     
-    func gameSceneShouldPlayCollideSound(scene: GameScene) -> Bool {
+    func gameSceneShouldPlayAudioEffect(scene: GameScene) -> Bool {
         return !isInAgoraAudio
     }
     
-    func gameScene(scene: GameScene, didCollideAtPan pan: CGFloat) {
-        let path = Bundle.main.path(forResource: "boom", ofType: "mp3")!
+    func gameScene(scene: GameScene, needPlayEffectResource resource: String, ofType type: String, atPan pan: CGFloat) {
+        guard let path = Bundle.main.path(forResource: resource, ofType: type) else {
+            return
+        }
         agoraKit?.playEffect(0, filePath: path, loop: false, pitch: 1, pan: Double(pan), gain: 100)
     }
 }
