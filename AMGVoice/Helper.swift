@@ -94,6 +94,7 @@ extension AgoraRtcChannelProfile {
         switch self {
         case .channelProfile_Game_Free_Mode:    return "Free Mode"
         case .channelProfile_Game_Command_Mode: return "Command Mode"
+        default: return ""
         }
     }
 }
