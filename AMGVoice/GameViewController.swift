@@ -74,14 +74,6 @@ class GameViewController: UIViewController {
         
         loadAgoraKit()
         playBackGroundMusic(fromTime: 0)
-        
-        NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: nil) { [weak self] _ in
-            self?.agoraKit.resume();
-        }
-        
-        NotificationCenter.default.addObserver(forName: .UIApplicationDidEnterBackground, object: nil, queue: nil) { [weak self] _ in
-            self?.agoraKit.pause();
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
