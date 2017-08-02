@@ -347,7 +347,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yuhua Gong (TH5SJ72C94)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuhua Gong (TH5SJ72C94)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 48TB6ZZL5S;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -360,7 +360,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.agora.gaming.spritekit.spacewar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "87f6e50f-6472-4e90-a6d4-f19c7bd21f23";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = AgoraIODev2017;
 				SWIFT_OBJC_BRIDGING_HEADER = "AMGVoice/AMGVoice-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -373,7 +373,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Agora Lab, Inc. (48TB6ZZL5S)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Agora Lab, Inc. (48TB6ZZL5S)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 48TB6ZZL5S;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -385,8 +385,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.agora.gaming.spritekit.spacewar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7a7d2f53-b6ce-4693-ad10-47150f8b2094";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "87f6e50f-6472-4e90-a6d4-f19c7bd21f23";
+				PROVISIONING_PROFILE_SPECIFIER = AgoraIODev2017;
 				SWIFT_OBJC_BRIDGING_HEADER = "AMGVoice/AMGVoice-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
