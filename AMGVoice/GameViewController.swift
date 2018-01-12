@@ -34,7 +34,7 @@ class GameViewController: UIViewController {
     fileprivate var gameScene: GameScene?
     
     //MARK: engine
-    fileprivate var agoraKit: AgoraRtcEngineKitForGaming!
+    fileprivate var agoraKit: AgoraRtcEngineKit!
     fileprivate var isInAgoraAudio = false {
         didSet {
             callButton?.setImage(isInAgoraAudio ? #imageLiteral(resourceName: "btn_speaker_blue") : #imageLiteral(resourceName: "btn_speaker"), for: .normal)
@@ -185,7 +185,7 @@ private extension GameViewController {
 //MARK: Agora SDK
 private extension GameViewController {
     func loadAgoraKit() {
-        agoraKit = AgoraRtcEngineKitForGaming.sharedEngine(withAppId:KeyCenter.appId, delegate: self)!
+        agoraKit = AgoraRtcEngineKit.sharedEngine(withAppId:KeyCenter.appId, delegate: self)
         agoraKit.setLogFile(FileCenter.audioLogFilePath())
         agoraKit.setLogFilter(AgoraRtcLogFilter.logFilter_Debug.rawValue)
         
@@ -196,7 +196,7 @@ private extension GameViewController {
     }
     
     func joinChannel() {
-        let code = agoraKit.joinChannel(roomName, info: nil, uid: 0)
+        let code = agoraKit.joinChannel(byKey: nil, channelName: roomName, info: nil, uid: 0)
         
         if code != 0 {
             DispatchQueue.main.async(execute: {
@@ -225,22 +225,22 @@ private extension GameViewController {
     }
 }
 
-extension GameViewController: AgoraRtcEngineKitForGamingDelegate {
-    func rtcEngine(_ engine: AgoraRtcEngineKitForGaming!, didJoinChannel channel: String!, withUid uid: UInt, elapsed: Int) {
+extension GameViewController: AgoraRtcEngineDelegate {
+    func rtcEngine(_ engine: AgoraRtcEngineKit!, didJoinChannel channel: String!, withUid uid: UInt, elapsed: Int) {
         if useAudioMixing {
             switchBackGroundMusicToAudioMixing()
         }
     }
     
-    func rtcEngine(_ engine: AgoraRtcEngineKitForGaming!, didJoinedOfUid uid: UInt, elapsed: Int) {
+    func rtcEngine(_ engine: AgoraRtcEngineKit!, didJoinedOfUid uid: UInt, elapsed: Int) {
         gameScene?.addSpeaker(of: uid)
     }
     
-    func rtcEngine(_ engine: AgoraRtcEngineKitForGaming!, didOfflineOfUid uid: UInt, reason: AgoraRtcUserOfflineReason) {
+    func rtcEngine(_ engine: AgoraRtcEngineKit!, didOfflineOfUid uid: UInt, reason: AgoraRtcUserOfflineReason) {
         gameScene?.removeSpeaker(of: uid)
     }
     
-    func rtcEngine(_ engine: AgoraRtcEngineKitForGaming!, reportAudioVolumeIndicationOfSpeakers speakers: [Any]!, totalVolume: Int) {
+    func rtcEngine(_ engine: AgoraRtcEngineKit!, reportAudioVolumeIndicationOfSpeakers speakers: [Any]!, totalVolume: Int) {
         guard let speakers = speakers as? [AgoraRtcAudioVolumeInfo] else {
             return
         }
@@ -253,16 +253,14 @@ extension GameViewController: AgoraRtcEngineKitForGamingDelegate {
         }
     }
     
-    func rtcEngine(_ engine: AgoraRtcEngineKitForGaming!, didOccurWarning warningCode: AgoraRtcWarningCode) {
+    func rtcEngine(_ engine: AgoraRtcEngineKit!, didOccurWarning warningCode: AgoraRtcWarningCode) {
         let code = warningCode.rawValue
-        let msg = AgoraRtcEngineKitForGaming.getErrorDescription(code)!
-        gameScene?.alertString("Engine occur warning: \(code) \(msg)")
+        gameScene?.alertString("Engine occur warning: \(code)")
     }
     
-    func rtcEngine(_ engine: AgoraRtcEngineKitForGaming!, didOccurError errorCode: AgoraRtcErrorCode) {
+    func rtcEngine(_ engine: AgoraRtcEngineKit!, didOccurError errorCode: AgoraRtcErrorCode) {
         let code = errorCode.rawValue
-        let msg = AgoraRtcEngineKitForGaming.getErrorDescription(code)!
-        gameScene?.alertString("Engine occur error: \(code) \(msg)")
+        gameScene?.alertString("Engine occur error: \(code)")
     }
 }
 
@@ -270,7 +268,7 @@ extension GameViewController: AgoraRtcEngineKitForGamingDelegate {
 extension GameViewController: GameSceneDelegate {
     func gameScene(scene: GameScene, didMoveSpeakerOfUid uid: UInt, pan : CGFloat, gain: CGFloat) {
         print("didMoveSpeakerOfUid: \(uid), pan: \(pan), gain: \(gain)")
-        agoraKit?.setRemoteVoicePosition(uid, pan: Double(pan), gain: Double(gain))
+//        agoraKit?.AgoraRtcEngineKit(uid, pan: Double(pan), gain: Double(gain))
     }
     
     func gameSceneShouldPlayAudioEffect(scene: GameScene) -> Bool {

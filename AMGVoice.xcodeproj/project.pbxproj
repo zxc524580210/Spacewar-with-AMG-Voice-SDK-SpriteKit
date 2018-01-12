@@ -27,6 +27,7 @@
 		07B07E991EB331E0003DF680 /* AgoraAudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07B07E981EB331E0003DF680 /* AgoraAudioKit.framework */; };
 		07E326C81E79278A0019310C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E326C71E79278A0019310C /* Helper.swift */; };
 		07E326CA1E792CF40019310C /* AudioSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E326C91E792CF40019310C /* AudioSettingsViewController.swift */; };
+		8BB772A72008816000157CFC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BB772A62008815A00157CFC /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		07B07E981EB331E0003DF680 /* AgoraAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AgoraAudioKit.framework; sourceTree = "<group>"; };
 		07E326C71E79278A0019310C /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		07E326C91E792CF40019310C /* AudioSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioSettingsViewController.swift; sourceTree = "<group>"; };
+		8BB772A62008815A00157CFC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BB772A72008816000157CFC /* SystemConfiguration.framework in Frameworks */,
 				070227CB1E8520C900004AE2 /* libresolv.tbd in Frameworks */,
 				0759B94E1E68181D004DF60A /* libc++.tbd in Frameworks */,
 				0759B94C1E681818004DF60A /* CoreTelephony.framework in Frameworks */,
@@ -110,6 +113,7 @@
 		0759B9461E68180A004DF60A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8BB772A62008815A00157CFC /* SystemConfiguration.framework */,
 				070227CA1E8520C900004AE2 /* libresolv.tbd */,
 				0759B94D1E68181D004DF60A /* libc++.tbd */,
 				0759B94B1E681818004DF60A /* CoreTelephony.framework */,

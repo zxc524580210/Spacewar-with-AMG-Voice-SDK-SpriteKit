@@ -23,7 +23,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let sdkVersion = AgoraRtcEngineKitForGaming.getSdkVersion()
+        let sdkVersion = AgoraRtcEngineKit.getSdkVersion()
         versionLabel.text = sdkVersion
         
         gameProfile = GameProfile.free()
