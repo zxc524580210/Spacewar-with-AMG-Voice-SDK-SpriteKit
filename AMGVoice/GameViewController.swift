@@ -269,6 +269,7 @@ extension GameViewController: GameSceneDelegate {
     func gameScene(scene: GameScene, didMoveSpeakerOfUid uid: UInt, pan : CGFloat, gain: CGFloat) {
         print("didMoveSpeakerOfUid: \(uid), pan: \(pan), gain: \(gain)")
 //        agoraKit?.AgoraRtcEngineKit(uid, pan: Double(pan), gain: Double(gain))
+        agoraKit.setRemoteVoicePosition(uid, pan: Double(pan), gain: Double(gain) )
     }
     
     func gameSceneShouldPlayAudioEffect(scene: GameScene) -> Bool {
