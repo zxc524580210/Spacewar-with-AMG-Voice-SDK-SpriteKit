@@ -39,11 +39,12 @@ class GameScene: SKScene {
     fileprivate var selectedTouchOrigin: CGPoint?
     fileprivate var selectedSpeakerOrigin: CGPoint?
     fileprivate let kSpeakerNodeName = "speakerNode"
-    fileprivate let kSpeakerRadius: CGFloat = 24
+    fileprivate let kSpeakerRadius: CGFloat = 40
     fileprivate lazy var availablePeerRect: CGRect = {
         let width = self.size.width - self.kSpeakerRadius * 2
-        let height = width * 0.8
-        return CGRect(x: self.kSpeakerRadius, y: self.size.height - height - self.kSpeakerRadius * 3, width: width, height: height)
+        let height = UIScreen.main.bounds.size.height
+        
+        return CGRect(x: self.kSpeakerRadius, y: 0, width: width, height: height - self.kSpeakerRadius * 4)
     }()
     fileprivate var alertLabelNode: SKLabelNode?
     
@@ -188,14 +189,12 @@ private extension GameScene {
     func fireStar(to location: CGPoint) {
         let star = SKSpriteNode(imageNamed: "star")
         star.position = ship.position + CGPoint(x: 0, y: 5)
-        
         star.physicsBody = SKPhysicsBody(circleOfRadius: star.size.width / 2)
         star.physicsBody?.isDynamic = true
         star.physicsBody?.categoryBitMask = PhysicsCategory.Star
         star.physicsBody?.contactTestBitMask = PhysicsCategory.Speaker
         star.physicsBody?.collisionBitMask = PhysicsCategory.None
         star.physicsBody?.usesPreciseCollisionDetection = true
-        
         let offset = location - star.position
         if (offset.y < 0) {
             return
@@ -275,14 +274,19 @@ private extension GameScene {
         let speaker = SKShapeNode(circleOfRadius: radius)
         speaker.fillColor = randomColor()
         speaker.name = kSpeakerNodeName
-        
         speaker.physicsBody = SKPhysicsBody(circleOfRadius: radius)
         speaker.physicsBody?.isDynamic = true
         speaker.physicsBody?.categoryBitMask = PhysicsCategory.Speaker
         speaker.physicsBody?.contactTestBitMask = PhysicsCategory.Star
         speaker.physicsBody?.collisionBitMask = PhysicsCategory.None
-        
-        speaker.position = CGPoint(x: availablePeerRect.midX, y: availablePeerRect.maxY)
+        let X = UIScreen.main.bounds.width
+        let randX = CGFloat(arc4random_uniform(UInt32(X - availablePeerRect.midX)));
+        var randY = CGFloat(arc4random_uniform(UInt32(availablePeerRect.maxY)));
+        if(randY < UIScreen.main.bounds.size.height - 98)
+        {
+            randY = UIScreen.main.bounds.size.height - 98
+        }
+        speaker.position = CGPoint(x: randX, y: randY)
         speaker.zPosition = 3
         return speaker
     }
@@ -321,7 +325,6 @@ private extension GameScene {
         guard let selectedSpeakerOrigin = selectedSpeakerOrigin else {
             return
         }
-        
         let newPosition = selectedSpeakerOrigin + translation
         if availablePeerRect.contains(newPosition) {
             speaker.position = newPosition
